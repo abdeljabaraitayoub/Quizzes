@@ -99,7 +99,7 @@ include('../../dbcon.php');
                                                     <div class="dropdown-menu rounded" aria-labelledby="dropdownMenuIconButton2">
                                                         <a class="dropdown-item" href="modifycourse.php?id=<?php echo $row['id'] ?>">modify</a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">delete</a>
+                                                        <a class="dropdown-item" href="deletecourse.php?id=<?php echo $row['id'] ?>">delete</a>
 
                                                     </div>
                                                 </div>
