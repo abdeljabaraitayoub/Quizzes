@@ -1,4 +1,3 @@
-<?php include('dbcon.php'); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,29 +18,6 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="images/favicon.ico" />
 </head>
-<?php
-if (isset($_POST['email']) && isset($_POST['password'])) {
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $query = "SELECT * FROM users where email = '$email'";
-    $result = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc($result);
-
-    if ($password == "" && $email == "") {
-        header("location:index.php?error=1");
-    } else if ($password == "") {
-        header("location:index.php?error=2");
-    } else if ($email == "") {
-        header("location:index.php?error=3");
-    } else {
-        if ($row['email'] == $email && password_verify($password, $row['password'])) {
-            header('location:home.php?inedx=1');
-        } else {
-            header("location:index.php?error=4");
-        }
-    }
-}
-?>
 
 <body>
     <div class="container-scroller">
@@ -76,9 +52,9 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                                     echo "<strong class=\"text-danger fs-10px\">password or username are wrong</strong>";
                                 }
                             } ?>
-                            <form class="pt-3" method="post" action="index.php">
+                            <form class="pt-3" method="post" action="idethication.php">
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="email">
+                                    <input type="text" name="name" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Nom d'utilisateur">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mot de passe">
