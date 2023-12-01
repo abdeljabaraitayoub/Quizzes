@@ -41,7 +41,7 @@
           </div>
           <div class="row mt-5">
             <div class="col-12 mt-xl-2">
-              <p class="text-white font-weight-medium text-center">Quizzes &copy; 2021 Tous droits réservés.</p>
+              <p class="text-white font-weight-medium text-center">Quizzes &copy; 2023 Tous droits réservés.</p>
             </div>
           </div>
         </div>
