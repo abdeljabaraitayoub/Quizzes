@@ -36,7 +36,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     } else {
         if ($row['email'] == $email && password_verify($password, $row['password'])) {
             header('location:home.php?inedx=1');
-        } else if ($row['email'] != $email && $row['password'] != $password) {
+        } else {
             header("location:index.php?error=4");
         }
     }
