@@ -55,6 +55,13 @@ CREATE TABLE answers (
     FOREIGN KEY (question_id) REFERENCES questions(id)
 ) ENGINE = InnoDB;
 
+/* CREATE TABLE user_sessions (
+    id VARCHAR(128) PRIMARY KEY,
+    user_id SMALLINT UNSIGNED NOT NULL,
+    last_activity TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE=InnoDB; */
+
 
 -- Remplir les tables avec des données
 

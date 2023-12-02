@@ -9,7 +9,7 @@ $connection = mysqli_connect(HOSTNAME, USERNAME, PASSWORD, DATABASE);
 
 function abort($code = 404){
     http_response_code($code);
-    require "pages/{$code}.php";
+    header("Location: pages/{$code}.php");
     die();
 }
 
