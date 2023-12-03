@@ -1,5 +1,15 @@
+<?php
+include('dbcon.php');
+// Démarrer la session pour accéder aux variables de session
+session_start();
+
+// Vérifier si l'utilisateur est autorisé pour consulter cette page
+if (!isset($_SESSION['user_id'])) {
+    abort(403);
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -37,7 +47,7 @@
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Welcome Aamir</h3>
+                                <h3 class="font-weight-bold">Welcome <?php echo $_SESSION['username']; ?>!!</h3>
                                 <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
                             </div>
                             <div class="col-12 col-xl-4">

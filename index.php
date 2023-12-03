@@ -1,4 +1,45 @@
-<?php include('dbcon.php'); ?>
+<?php
+include('dbcon.php');
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['email']) && isset($_POST['password'])) {
+        $password = $_POST['password'];
+        $email = $_POST['email'];
+
+        $errors = [];
+
+        if (empty($email)) {
+            $errors['email'] = 'L\'adresse e-mail est requise';
+        } elseif (empty($password)) {
+            $errors['password1'] = 'Le mot de passe est requis';
+        } else {
+            $query = "SELECT * FROM users where email = '$email'";
+            $result = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($result);
+
+            if ($row) {
+                if (password_verify($password, $row['password'])) {
+                    // Connexion réussie
+                    $_SESSION['user_id'] = $row['id'];
+                    $_SESSION['username'] = $row['username'];
+                    $_SESSION['role'] = $row['role'];
+                    // Rediriger vers la page d'accueil ou tableau de bord
+                    header("Location: dashboard.php");
+                    exit();
+                } else {
+                    // Mot de passe incorrect
+                    $errors['password2'] = 'Mot de passe incorrect';
+                }
+            } else {
+                // Utilisateur n'existe pas
+                $errors['user'] = 'Utilisateur n\'existe pas';
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,30 +60,6 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="images/favicon.ico" />
 </head>
-<?php
-if (isset($_POST['email']) && isset($_POST['password'])) {
-    $password = $_POST['password'];
-    $email = $_POST['email'];
-    $query = "SELECT * FROM users where email = '$email'";
-    $result = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc($result);
-
-    if ($password == "" && $email == "") {
-        header("location:index.php?error=1");
-    } else if ($password == "") {
-        header("location:index.php?error=2");
-    } else if ($email == "") {
-        header("location:index.php?error=3");
-    } else {
-        if ($row['email'] == $email && password_verify($password, $row['password'])) {
-            header('location:home.php?inedx=1');
-        } else {
-            header("location:index.php?error=4");
-        }
-    }
-}
-?>
-
 <body>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -53,38 +70,26 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                             <div class="brand-logo text-center">
                                 <img src="images/youcode.png" alt="logo">
                             </div>
-                            <?php
-                            if (isset($_GET['error'])) {
-                                if ($_GET['error'] == 1) {
-
-                                    // echo $_GET['error'];
-                                    echo "<strong class=\"text-danger fs-10px\">Username and Password is required!!</strong>";
-                                }
-                                if ($_GET['error'] == 2) {
-
-                                    // echo $_GET['error'];
-                                    echo "<strong class=\"text-danger fs-10px\">Password is required!!</strong>";
-                                }
-                                if ($_GET['error'] == 3) {
-
-                                    // echo $_GET['error'];
-                                    echo "<strong class=\"text-danger fs-10px\">Username is required!!</strong>";
-                                }
-                                if ($_GET['error'] == 4) {
-
-                                    // echo $_GET['error'];
-                                    echo "<strong class=\"text-danger fs-10px\">password or username are wrong</strong>";
-                                }
-                            } ?>
-                            <form class="pt-3" method="post" action="index.php">
+                            <form class="pt-3" method="post" action="">
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="email">
+                                    <?php if (isset($errors['user'])): ?>
+                                        <p class="text-danger"><?= $errors['user'] ?></p>
+                                    <?php endif; ?>
+                                    <?php if (isset($errors['email'])): ?>
+                                        <p class="text-danger"><?= $errors['email'] ?></p>
+                                    <?php endif; ?>
+                                    <input type="email" name="email" class="form-control form-control-lg" id="email" placeholder="E-mail">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mot de passe">
+                                    <?php if (isset($errors['password1'])): ?>
+                                        <p class="text-danger"><?= $errors['password1'] ?></p>
+                                    <?php endif; ?>
+                                    <?php if (isset($errors['password2'])): ?>
+                                        <p class="text-danger"><?= $errors['password2'] ?></p>
+                                    <?php endif; ?>
+                                    <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Mot de passe">
                                 </div>
                                 <div class="mt-3">
-                                    <!-- <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="">CONNEXION</a> -->
                                     <input value="CONNEXION" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
