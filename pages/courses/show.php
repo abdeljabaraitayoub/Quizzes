@@ -34,8 +34,14 @@ include('../../dbcon.php');
         }
 
         a {
-            text-decoration: none !important;
+            color: inherit;
+            text-decoration: inherit;
         }
+
+        a:hover {
+            color: inherit;
+        }
+
 
         .plus {
             font-size: 120px;
@@ -99,22 +105,24 @@ include('../../dbcon.php');
                                                     <div class="dropdown-menu rounded" aria-labelledby="dropdownMenuIconButton2">
                                                         <a class="dropdown-item" href="modifycourse.php?id=<?php echo $row['id'] ?>">modify</a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="deletecourse.php?id=<?php echo $row['id'] ?>">delete</a>
+                                                        <a class="dropdown-item" href="#">delete</a>
 
                                                     </div>
                                                 </div>
                                                 <!-- <h3 class="" type="button" id="dropdownMenuIconButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">... </h3> -->
                                             </div>
                                         </div>
-                                        <div class="mt-1">
-                                            <p><?php echo substr_replace($row['content'], "...", 470); ?></p>
-                                            <!-- <div class=" mt-5">
+                                        <a href="course.php?id=<?php echo $row['id'] ?>">
+                                            <div class="mt-1">
+                                                <p><?php echo substr_replace($row['content'], "...", 470); ?></p>
+                                                <!-- <div class=" mt-5">
                                                 <div class="progress">
                                                     <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
                                                 <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div>
                                             </div> -->
-                                        </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             <?php
