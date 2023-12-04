@@ -76,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                            name="username"
                                            class="form-control form-control-lg"
                                            id="username"
-                                           value="<?php echo $_POST['username']; ?>"
                                            placeholder="Nom d'utilisateur">
                                 </div>
                                 <div class="form-group">
@@ -87,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                            name="email"
                                            class="form-control form-control-lg"
                                            id="email"
-                                           value="<?php echo $_POST['email']; ?>"
                                            placeholder="E-mail">
                                 </div>
                                 <div class="form-group">
@@ -98,7 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                            name="password1"
                                            class="form-control form-control-lg"
                                            id="password1"
-                                           value="<?php echo $_POST['password1']; ?>"
                                            placeholder="Mot de passe">
                                 </div>
                                 <div class="form-group">
