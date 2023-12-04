@@ -108,7 +108,7 @@ include('../../dbcon.php');
                                                         <a class="dropdown-item" href="deletecourse.php?id=<?php echo $row['id'] ?>">delete</a>
                                                     </div>
                                                 </div>
-                                                <!-- <h3 class="" type="button" id="dropdownMenuIconButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">... </h3> -->
+                                                <!-- <h3 class="sdsd" type="button" id="dropdownMenuIconButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">... </h3> -->
                                             </div>
                                         </div>
                                         <a href="course.php?id=<?php echo $row['id'] ?>">
