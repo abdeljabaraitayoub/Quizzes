@@ -105,8 +105,7 @@ include('../../dbcon.php');
                                                     <div class="dropdown-menu rounded" aria-labelledby="dropdownMenuIconButton2">
                                                         <a class="dropdown-item" href="modifycourse.php?id=<?php echo $row['id'] ?>">modify</a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">delete</a>
-
+                                                        <a class="dropdown-item" href="deletecourse.php?id=<?php echo $row['id'] ?>">delete</a>
                                                     </div>
                                                 </div>
                                                 <!-- <h3 class="" type="button" id="dropdownMenuIconButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">... </h3> -->
@@ -140,9 +139,6 @@ include('../../dbcon.php');
                                     </div>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                 </div>

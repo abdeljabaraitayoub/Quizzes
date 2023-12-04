@@ -49,24 +49,39 @@ if (isset($_GET['id'])) {
             <?php include('../../partials/_sidebar.php'); ?>
             <!-- partial -->
             <div class="main-panel">
+                <div class="content-wrapper">
                     <div class="card col-md-6 mx-auto">
                         <div class="card-body">
-                            <h4 class="card-title"><?php echo $row['title']; ?></h4>
-                            <p class="card-description">
-                                <?php echo $row['description']; ?>
-                            </p>
-                            <div class="card-content">
+                            <div class="card-body">
+                                <h4 class="card-title"><?php echo $row['title']; ?></h4>
+                                <p class="card-description">
+                                    <?php echo $row['description']; ?>
+                                </p>
+                                <div class="card-content">
+                                    <p>
+                                        <?php echo nl2br($row['content']); ?>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
                                 <p>
-                                    <?php echo nl2br($row['content']); ?>
+                                    <button type="button" class="btn btn-success btn-md">Marquer comme complété</button>
+                                    <button type="button" class="btn btn-outline-info btn-md">passer le quizz</button>
                                 </p>
                             </div>
                         </div>
                     </div>
-                <!-- page-body-wrapper ends -->
+                    <br>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.php -->
+                    <?php include('../../partials/_footer.php'); ?>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
             </div>
+
         </div>
         <!-- partial:partials/_footer.php -->
-        <?php include('../../partials/_footer.php'); ?>
     </div>
 
             <!-- container-scroller -->

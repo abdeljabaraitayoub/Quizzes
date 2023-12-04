@@ -97,8 +97,8 @@ if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_PO
                                     <input type="text" class="form-control" id="description" placeholder="Description" name="description" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="videoLink">Lien de vidéo</label>
-                                    <input type="text" class="form-control" id="videoLink" placeholder="Lien de vidéo" name="video_link">
+                                    <label for="video_link">Lien de vidéo</label>
+                                    <input type="text" class="form-control" id="video_link" placeholder="Lien de vidéo" name="video_link">
                                 </div>
                                 <div class="form-group">
                                     <label for="content">Contenu</label>
