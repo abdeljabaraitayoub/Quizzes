@@ -1,7 +1,6 @@
 <?php
 include('../../dbcon.php');
-?>
-<?php
+
 if (isset($_GET['id'])) {
     $courseid = $_GET['id'];
     $query = "select * from courses where id = '$courseid'";
@@ -40,37 +39,6 @@ if (isset($_GET['id'])) {
 
 
 <body>
-    <style>
-        .min {
-            min-height: 249px;
-        }
-
-        a {
-            text-decoration: none !important;
-        }
-
-        .plus {
-            font-size: 120px;
-            font-family: "Nunito", sans-serif;
-            font-weight: 500;
-            color: #6C7383;
-            cursor: pointer;
-            opacity: 75%;
-        }
-
-        /* .card {
-            margin-bottom: 20px;
-        } */
-
-        .plus:hover {
-            opacity: 100%;
-        }
-
-        /* .card:hover {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-        } */
-    </style>
     <div class="container-scroller">
         <!-- partial:partials/_navbar.php -->
         <?php include('../../partials/_navbar.php'); ?>
@@ -82,22 +50,40 @@ if (isset($_GET['id'])) {
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <h1>
-                        <?php echo $row['title']; ?>
-                    </h1>
-                    <h3 class="mt-3">
-                        <?php echo $row['description']; ?>
-                    </h3>
-                    <span class="mt-5 mb-5">
-                        <?php echo $row['content']; ?>
-                    </span>
-
+                    <div class="card col-md-6 mx-auto">
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h4 class="card-title"><?php echo $row['title']; ?></h4>
+                                <p class="card-description">
+                                    <?php echo $row['description']; ?>
+                                </p>
+                                <div class="card-content">
+                                    <p>
+                                        <?php echo nl2br($row['content']); ?>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <p>
+                                    <button type="button" class="btn btn-success btn-md">Marquer comme complété</button>
+                                    <button type="button" class="btn btn-outline-info btn-md">passer le quizz</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.php -->
                     <?php include('../../partials/_footer.php'); ?>
-
-                    <!-- main-panel ends -->
+                    <!-- partial -->
                 </div>
-                <!-- page-body-wrapper ends -->
+                <!-- main-panel ends -->
             </div>
+
+        </div>
+        <!-- partial:partials/_footer.php -->
+    </div>
+
             <!-- container-scroller -->
 
             <!-- plugins:js -->
