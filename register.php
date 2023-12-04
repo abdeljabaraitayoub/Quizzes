@@ -69,28 +69,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <form class="pt-3" method="POST" action="">
                                 <div class="form-group">
-                                    <?php if (isset($errors['username'])) : ?>
+                                    <?php if (isset($errors['username'])): ?>
                                         <p class="text-danger"><?= $errors['username']; ?></p>
                                     <?php endif; ?>
-                                    <input type="text" name="username" class="form-control form-control-lg" id="username" placeholder="Nom d'utilisateur">
+                                    <input type="text"
+                                           name="username"
+                                           class="form-control form-control-lg"
+                                           id="username"
+                                           placeholder="Nom d'utilisateur">
                                 </div>
                                 <div class="form-group">
-                                    <?php if (isset($errors['email'])) : ?>
+                                    <?php if (isset($errors['email'])): ?>
                                         <p class="text-danger"><?= $errors['email']; ?></p>
                                     <?php endif; ?>
-                                    <input type="email" name="email" class="form-control form-control-lg" id="email" placeholder="E-mail">
+                                    <input type="email"
+                                           name="email"
+                                           class="form-control form-control-lg"
+                                           id="email"
+                                           placeholder="E-mail">
                                 </div>
                                 <div class="form-group">
-                                    <?php if (isset($errors['password1'])) : ?>
+                                    <?php if (isset($errors['password1'])): ?>
                                         <p class="text-danger"><?= $errors['password1']; ?></p>
                                     <?php endif; ?>
-                                    <input type="password" name="password1" class="form-control form-control-lg" id="password1" placeholder="Mot de passe">
+                                    <input type="password"
+                                           name="password1"
+                                           class="form-control form-control-lg"
+                                           id="password1"
+                                           placeholder="Mot de passe">
                                 </div>
                                 <div class="form-group">
-                                    <?php if (isset($errors['password2'])) : ?>
+                                    <?php if (isset($errors['password2'])): ?>
                                         <p class="text-danger"><?= $errors['password2']; ?></p>
                                     <?php endif; ?>
-                                    <input type="password" name="password2" class="form-control form-control-lg" id="password2" placeholder="Rentrer le Mot de passe">
+                                    <input type="password"
+                                           name="password2"
+                                           class="form-control form-control-lg"
+                                           id="password2"
+                                           placeholder="Rentrer le Mot de passe">
                                 </div>
                                 <div class="mb-4">
                                     <div class="form-check">

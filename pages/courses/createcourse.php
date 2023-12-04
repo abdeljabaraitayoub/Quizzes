@@ -1,7 +1,6 @@
 <?php
 include('../../dbcon.php');
-?>
-<?php
+
 if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_POST['video_link']) {
     $title = $_POST['title'];
     $desciption = $_POST['description'];
@@ -88,22 +87,22 @@ if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_PO
                             <p class="card-description">
                                 Entrer les informations du votre cours
                             </p>
-                            <form method="post" class="forms-sample">
+                            <form method="post" class="forms-sample" action="">
                                 <div class="form-group">
-                                    <label for="exampleInputTitle">Titre du cours</label>
-                                    <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du cours" name="title" required>
+                                    <label for="title">Titre du cours</label>
+                                    <input type="text" class="form-control" id="title" placeholder="Titre du cours" name="title" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputDescription">Description</label>
-                                    <input type="text" class="form-control" id="exampleInputDescription" placeholder="Description" name="description" required>
+                                    <label for="description">Description</label>
+                                    <input type="text" class="form-control" id="description" placeholder="Description" name="description" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputVideoLink">Lien de vidéo</label>
-                                    <input type="text" class="form-control" id="exampleInputVideoLink" placeholder="Lien de vidéo" name="video_link" required>
+                                    <label for="video_link">Lien de vidéo</label>
+                                    <input type="text" class="form-control" id="video_link" placeholder="Lien de vidéo" name="video_link">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputContent">Contenu</label>
-                                    <textarea class="form-control" placeholder="Contenu" id="exampleInputContent" rows="14" name="content" required></textarea>
+                                    <label for="content">Contenu</label>
+                                    <textarea class="form-control" placeholder="Contenu" id="content" rows="14" name="content" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary mr-2">Soumettre</button>
                                 <a class="btn btn-light" href="show.php">Annuler</a>
