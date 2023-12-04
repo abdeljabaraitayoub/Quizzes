@@ -131,7 +131,7 @@ include('../../dbcon.php');
                             <div class="col-md-4 mb-4">
                                 <div class="card p-3 justify-content-center mb-2 min">
                                     <div class="d-flex justify-content-center">
-                                        <a href="createcourse.php">
+                                        <a href="createcourse.php" style="text-decoration: none">
                                             <h1 class="plus">
                                                 +
                                             </h1>
