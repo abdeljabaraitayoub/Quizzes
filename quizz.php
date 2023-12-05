@@ -1,85 +1,58 @@
-<!-- <?php
-require('conn.php');
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $score = 0;
-
-//     // Assuming the correct answers are 'a' for all questions
-//     $correctAnswers = ['a', 'a'];
-
-//     // Check each answer and calculate the score
-//     for ($i = 1; $i <= count($correctAnswers); $i++) {
-//         $questionName = 'q' . $i;
-//         if (isset($_POST[$questionName]) && $_POST[$questionName] === $correctAnswers[$i - 1]) {
-//             $score++;
-//         }
-//     }
-
-//     // Display the score
-//     echo "You scored $score out of " . count($correctAnswers) . " questions.";
-// }
-?> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Quiz Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-    <style>
-      
-        body {
-            padding: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Examen QCM</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 40px;
+    }
+    .question {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .option {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
 
+<form action="">
 <div class="container">
-    <h2 class="mt-5 mb-4"> Quizzes :</h2>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h2 class="text-center">QUiZZe</h2>
+      <?php
 
-    <!-- Quiz Questions -->
+     require 'dbcon.php';
+     $sql = "SELECT FROM questions";
+     $result = mysqli_query($dbcon,$sql);
+      while ($value = mysqli_fetch_assoc($result)){
+     echo "<div class='question'>" . $value['question_text'] . "</div>";
+     $sql = "SELECT * FROM questions INNER JOIN answers ON questions.id = answers.question_id WHERE questions.id = " . $value['id']     ;
+     $result =mysqli_query($dbcon,$sql);
 
-    <form action="process_quiz.php" method="post">
-        <div class="mb-4">
-            <h4>1. What is the capital of France?</h4>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="q1" value="a">
-                <label class="form-check-label">a) Paris</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="q1" value="b">
-                <label class="form-check-label">b) London</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="q1" value="c">
-                <label class="form-check-label">c) Berlin</label>
-            </div>
-        </div>
+     while ($value2 = mysqli_fetch_assoc($result)){
+     echo "<div class='option'>
+       <input type='radio' id=" . $value2['id'] . " name=" . $value['id'] . ">
+       <label for=" . $value2['id'] . ">" . $value2['answer_text'] . "</label>
+     </div>";
+   }
+    } 
 
-        <!--  more questions  -->
-
-        <div class="mb-4">
-            <h4>2. What is the largest mammal?</h4>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="q2" value="a">
-                <label class="form-check-label">a) Elephant</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="q2" value="b">
-                <label class="form-check-label">b) Blue Whale</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" name="q2" value="c">
-                <label class="form-check-label">c) Giraffe</label>
-            </div>
-        </div>
-
-
-        <button type="submit" class="btn btn-primary">Submit Quiz</button>
-    </form>
+   ?>
+      <div class="text-center">
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </div>x
+  </div>
 </div>
+</form>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
