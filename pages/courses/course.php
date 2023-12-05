@@ -91,6 +91,7 @@ if (isset($_GET['id'])) {
                     <span class="mt-5 mb-5">
                         <?php echo $row['content']; ?>
                     </span>
+                    <iframe src="" frameborder="0"></iframe>
 
                     <?php include('../../partials/_footer.php'); ?>
 
