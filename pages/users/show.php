@@ -1,3 +1,11 @@
+<?php
+include('../../dbcon.php');
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    abort(403);
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -84,7 +92,6 @@
                                                 </thead>
                                                 <tbody>
                                                 <?php
-                                                include('../../dbcon.php');
                                                 $request = "SELECT * FROM users";
                                                 $query = $connection->query($request);
                                                 while ($rows = $query->fetch_assoc()) {

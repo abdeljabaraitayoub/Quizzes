@@ -24,6 +24,7 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+  <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
@@ -47,8 +48,8 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="col-md-12 grid-margin">
                         <div class="row">
                             <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                <h3 class="font-weight-bold">Welcome <?php echo $_SESSION['username']; ?>!!</h3>
-                                <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
+                                <h3 class="font-weight-bold">Bienvenue <?php echo $_SESSION['username']; ?>!!</h3>
+                                <h6 class="font-weight-normal mb-0">Je vous souhaite une <span class="text-primary">excellente</span> journée !</h6>
                             </div>
                             <div class="col-12 col-xl-4">
                                 <div class="justify-content-end d-flex">

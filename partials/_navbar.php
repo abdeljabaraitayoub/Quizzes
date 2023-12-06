@@ -1,7 +1,7 @@
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../dashboard.php"><img src="images/youcode.png" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="../dashboard.php"><img src="images/logo-mini.png" alt="logo" /></a>
+        <a class="navbar-brand brand-logo mr-5" href="<?php echo BASE; ?>dashboard.php"><img src="<?php echo BASE; ?>images/youcode.png" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="<?php echo BASE; ?>dashboard.php"><img src="<?php echo BASE; ?>images/logo-mini.png" alt="logo" /></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -59,14 +59,14 @@
             </li>
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                    <img src="images/faces/face28.jpg" alt="profil" />
+                    <img src="<?php echo BASE; ?>images/faces/face28.jpg" alt="profil" />
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                     <a class="dropdown-item">
                         <i class="ti-settings text-primary"></i>
                         Paramètres
                     </a>
-                    <form method="POST" action="logout.php">
+                    <form method="POST" action="<?php echo BASE; ?>logout.php">
                         <button class="dropdown-item" type="submit">
                             <i class="ti-power-off text-primary"></i>
                             Déconnexion

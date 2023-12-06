@@ -1,5 +1,10 @@
 <?php
 include('../../dbcon.php');
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    abort(403);
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];

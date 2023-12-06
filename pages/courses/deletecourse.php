@@ -1,6 +1,10 @@
 <?php
 include('../../dbcon.php');
 
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    abort(403);
+}
+
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

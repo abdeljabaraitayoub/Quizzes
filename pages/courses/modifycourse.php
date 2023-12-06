@@ -1,7 +1,11 @@
 <?php
 include('../../dbcon.php');
-?>
-<?php
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    abort(403);
+}
+
 if (isset($_GET['id'])) {
     $courseid = $_GET['id'];
     $query = "select * from courses where id = '$courseid'";
@@ -40,6 +44,7 @@ if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_PO
     <link rel="stylesheet" href="../../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="../../js/select.dataTables.min.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">

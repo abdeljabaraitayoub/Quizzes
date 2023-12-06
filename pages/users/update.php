@@ -1,5 +1,10 @@
 <?php
 include('../../dbcon.php');
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
+    abort(403);
+}
 
 $id = $_GET['id'];
 $data = "SELECT * FROM users WHERE id = $id" ;
@@ -71,7 +76,7 @@ if(isset($_POST['edit']))  {
                         <div class="col-lg-8 mx-auto">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">+ Ajouter un utilisateur</h4>
+                                    <h4 class="card-title">Modifier</h4>
                                     <form class="forms-sample" action="" method="POST">
                                         <?php if (isset($errors['password2'])): ?>
                                             <p class="text-danger"><?= $errors['password2']; ?></p>
