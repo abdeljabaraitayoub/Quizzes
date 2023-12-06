@@ -374,10 +374,10 @@ include('../../dbcon.php');
 
 												echo "<tr>";
 												echo "<td>
-                                " . $value['quizzeTitle'] . "
+                                " . $value['title'] . "
                                   </td>";
 												echo "<td>
-                                " . $value['courseTitle'] . "
+                                " . $value['title'] . "
                               </td>";
 												echo "<td>
                                 <a href='/'>now</a>
