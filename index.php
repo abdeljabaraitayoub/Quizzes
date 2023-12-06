@@ -1,6 +1,9 @@
 <?php
 include('dbcon.php');
 session_start();
+if (isset($_SESSION['user_id'])) {
+    header("Location: dashboard.php");
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['email']) && isset($_POST['password'])) {
