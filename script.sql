@@ -63,6 +63,32 @@ CREATE TABLE answers (
 ) ENGINE=InnoDB; */
 
 
--- Remplir les tables avec des données
+-- Alter table
+
+ALTER TABLE quizzes
+    ADD CONSTRAINT fk_quizzes_course_id FOREIGN KEY (course_id)
+        REFERENCES courses(id)
+        ON DELETE CASCADE;
+
+ALTER TABLE user_courses
+    ADD CONSTRAINT fk_user_courses_user_id FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE;
+
+ALTER TABLE user_courses
+    ADD CONSTRAINT fk_user_courses_course_id FOREIGN KEY (course_id)
+        REFERENCES courses(id)
+        ON DELETE CASCADE;
+
+ALTER TABLE questions
+    ADD CONSTRAINT fk_questions_quiz_id FOREIGN KEY (quiz_id)
+        REFERENCES quizzes(id)
+        ON DELETE CASCADE;
+
+ALTER TABLE answers
+    ADD CONSTRAINT fk_answers_question_id FOREIGN KEY (question_id)
+        REFERENCES questions(id)
+        ON DELETE CASCADE;
+
 
 
