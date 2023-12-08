@@ -319,7 +319,7 @@ include('../../dbcon.php');
 													<td><?php echo $title2; ?></td>
 													<td><?php echo $title1; ?></td>
 													<td>
-														<a href='dwezquizz.php?id=<?php echo $id; ?>'>now</a>
+														<a href='../questions/show.php?id=<?php echo $id; ?>'>now</a>
 													</td>
 													<td>
 														<p><?php echo $score; ?>%</p>
