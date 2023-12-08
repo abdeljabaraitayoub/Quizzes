@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin'):?>
