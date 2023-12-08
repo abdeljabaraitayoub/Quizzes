@@ -7,21 +7,21 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 if (isset($_GET['id'])) {
-    $courseid = $_GET['id'];
-    $query = "select * from courses where id = '$courseid'";
+    $courseId = $_GET['id'];
+    $query = "select * from courses where id = '$courseId'";
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_array($result);
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>My Resources</title>
+    <title>Quizzes</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../vendors/feather/feather.css">
     <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
 </head>
 
 
-<body>
+<body onscroll="progress()">
     <div class="container-scroller">
         <!-- partial:partials/_navbar.php -->
         <?php include('../../partials/_navbar.php'); ?>
@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                    <div class="card col-md-6 mx-auto">
+                    <div class="card col-md-8 mx-auto">
                         <div class="card-body">
                             <div class="card-body">
                                 <h4 class="card-title"><?php echo $row['title']; ?></h4>
@@ -65,11 +65,8 @@ if (isset($_GET['id'])) {
                                     </p>
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <p>
-                                    <button type="button" class="btn btn-success btn-md">Marquer comme complété</button>
-                                    <button type="button" class="btn btn-outline-info btn-md">passer le quizz</button>
-                                </p>
+                            <div class="card-footer d-flex justify-content-end">
+                                <button type="button" class="btn btn-inverse-success btn-md mr-2">Passer le quiz</button>
                             </div>
                         </div>
                     </div>
@@ -86,9 +83,52 @@ if (isset($_GET['id'])) {
         <!-- partial:partials/_footer.php -->
     </div>
 
-            <!-- container-scroller -->
+                <script>
+                    var courseId = <?php echo json_encode($courseId); ?>;
 
-            <!-- plugins:js -->
+                    function saveProgress(courseId, progress) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "save_progress.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.onreadystatechange = function() {
+                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                                console.log(this.responseText);
+                            }
+                        }
+                        xhr.send("course_id=" + courseId + "&progress=" + progress);
+                    }
+
+                    function progress(){
+                        var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                        var totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        var scrolledPercentage = (scrollPosition / totalHeight) * 100;
+
+                        saveProgress(courseId, Math.round(scrolledPercentage));
+                    }
+
+                    function retrieveProgressAndScroll(courseId) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("GET", "retrieve_progress.php?course_id=" + courseId, true);
+                        xhr.onreadystatechange = function() {
+                            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                                var progress = parseInt(this.responseText);
+                                if (!isNaN(progress)) {
+                                    var totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                                    var scrollToPosition = (progress / 100) * totalHeight;
+                                    window.scrollTo(0, scrollToPosition);
+                                }
+                            }
+                        }
+                        xhr.send();
+                    }
+
+                    window.onload = function() {
+                        retrieveProgressAndScroll(courseId);
+                    };
+
+                </script>
+
+    <!-- plugins:js -->
             <script src="../../vendors/js/vendor.bundle.base.js"></script>
             <!-- endinject -->
             <!-- Plugin js for this page -->

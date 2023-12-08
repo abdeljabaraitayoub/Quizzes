@@ -108,9 +108,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
                                                         ...
                                                     </h3>
                                                     <div class="dropdown-menu rounded" aria-labelledby="dropdownMenuIconButton2">
-                                                        <a class="dropdown-item" href="modifycourse.php?id=<?php echo $row['id'] ?>">modify</a>
+                                                        <a class="dropdown-item" href="modifycourse.php?id=<?php echo $row['id'] ?>">modifier</a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="deletecourse.php?id=<?php echo $row['id'] ?>">delete</a>
+                                                        <a class="dropdown-item" href="deletecourse.php?id=<?php echo $row['id'] ?>">supprimer</a>
                                                     </div>
                                                 </div>
                                                 <!-- <h3 class="sdsd" type="button" id="dropdownMenuIconButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">... </h3> -->
