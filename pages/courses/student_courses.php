@@ -22,7 +22,7 @@ while ($progress_row = mysqli_fetch_assoc($progress_result)) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>My Resources</title>
+    <title>Quizzes</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../vendors/feather/feather.css">
     <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
@@ -130,21 +130,7 @@ while ($progress_row = mysqli_fetch_assoc($progress_result)) {
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        } ?>
-                        <!-- insert new course -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card p-3 justify-content-center mb-2 min">
-                                <div class="d-flex justify-content-center">
-                                    <a href="createcourse.php" style="text-decoration: none">
-                                        <h1 class="plus">
-                                            +
-                                        </h1>
-                                    </a>
-
-                                </div>
-                            </div>
-                        </div>
+                            <?php } ?>
                     </div>
                 </div>
             </div>
