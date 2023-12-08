@@ -247,66 +247,6 @@ include('../../dbcon.php');
 			transform: rotateZ(45deg);
 		}
 
-		.custom-checkbox input[type="checkbox"]:checked+label:before {
-			border-color: #03A9F4;
-			background: #03A9F4;
-		}
-
-		.custom-checkbox input[type="checkbox"]:checked+label:after {
-			border-color: #fff;
-		}
-
-		.custom-checkbox input[type="checkbox"]:disabled+label:before {
-			color: #b8b8b8;
-			cursor: auto;
-			box-shadow: none;
-			background: #ddd;
-		}
-
-		/* Modal styles */
-		.modal .modal-dialog {
-			max-width: 400px;
-		}
-
-		.modal .modal-header,
-		.modal .modal-body,
-		.modal .modal-footer {
-			padding: 20px 30px;
-		}
-
-		.modal .modal-content {
-			border-radius: 3px;
-			font-size: 14px;
-		}
-
-		.modal .modal-footer {
-			background: #ecf0f1;
-			border-radius: 0 0 3px 3px;
-		}
-
-		.modal .modal-title {
-			display: inline-block;
-		}
-
-		.modal .form-control {
-			border-radius: 2px;
-			box-shadow: none;
-			border-color: #dddddd;
-		}
-
-		.modal textarea.form-control {
-			resize: vertical;
-		}
-
-		.modal .btn {
-			border-radius: 2px;
-			min-width: 100px;
-		}
-
-		.modal form label {
-			font-weight: normal;
-		}
-
 		img {
 			width: 2px;
 		}
@@ -337,8 +277,7 @@ include('../../dbcon.php');
 												<h2>Manage <b>QUIZZES</b></h2>
 											</div>
 											<div class="col-sm-6">
-												<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New UTILISTEUR</span></a>
-												<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>
+												<a href="addquiz.php" class="btn btn-success" "><i class=" material-icons">&#xE147;</i> <span>Add New UTILISTEUR</span></a>
 											</div>
 										</div>
 									</div>
@@ -367,35 +306,34 @@ include('../../dbcon.php');
 										</thead>
 										<tbody>
 											<?php
-											$requet = "SELECT * FROM `quizzes` INNER JOIN courses on quizzes.course_id = courses.id";
+											$requet = "SELECT quizzes.id AS quiz_id , courses.title AS course_title,`score`,`dateHour`, quizzes.title AS quiz_title FROM `quizzes` INNER JOIN courses on quizzes.course_id = courses.id";
 											$query = mysqli_query($connection, $requet);
 											while ($value = mysqli_fetch_assoc($query)) {
-												$id = $value['id'];
-
-												echo "<tr>";
-												echo "<td>
-                                " . $value['title'] . "
-                                  </td>";
-												echo "<td>
-                                " . $value['title'] . "
-                              </td>";
-												echo "<td>
-                                <a href='/'>now</a>
-                              </td>";
-												echo "<td>
-                              <p>" . $value['score'] . '%' . "</p>
-                              <div class='progress'>
-                              <div class='progress-bar bg-success' role='progressbar' style='width:" . $value['score'] . '%' . "' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'></div>
-                              </div>
-                              </td>";
-												echo "<td>
-                              " . $value['dateHour'] . "
-                              </td>";
-												echo "<td>
-                                  <a href='delete.php?id=$id' class='delete'><i class='material-icons' data-toggle='tooltip' title='Delete'>&#xE872;</i></a>
-                                  <a href='edit.php?id=$id' class='edit'><i class='material-icons' data-toggle='tooltip' title='Edit'>&#xE254;</i></a>
-                                 </td>";
-												echo "</tr>";
+												$id = $value['quiz_id'];
+												$title1 = $value['course_title'];
+												$title2 = $value['quiz_title'];
+												$score = $value['score'];
+												$dateHour = $value['dateHour'];
+											?>
+												<tr>
+													<td><?php echo $title2; ?></td>
+													<td><?php echo $title1; ?></td>
+													<td>
+														<a href='dwezquizz.php?id=<?php echo $id; ?>'>now</a>
+													</td>
+													<td>
+														<p><?php echo $score; ?>%</p>
+														<div class='progress'>
+															<div class='progress-bar bg-success' role='progressbar' style='width:<?php echo $score; ?>%' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'></div>
+														</div>
+													</td>
+													<td><?php echo $dateHour; ?></td>
+													<td>
+														<a href='delete.php?id=<?php echo $id; ?>' class='delete'><i class='material-icons' data-toggle='tooltip' title='Delete'>&#xE872;</i></a>
+														<a href='edit.php?id=<?php echo $id; ?>' class='edit'><i class='material-icons' data-toggle='tooltip' title='Edit'>&#xE254;</i></a>
+													</td>
+												</tr>
+											<?php
 											}
 											?>
 										</tbody>
@@ -424,57 +362,6 @@ include('../../dbcon.php');
 				<!-- main-panel ends -->
 			</div>
 			<!-- page-body-wrapper ends -->
-		</div>
-		<!-- container-scroller -->
-
-
-
-
-		<!-- add Modal HTML -->
-
-		<div id="addEmployeeModal" class="modal fade">
-			<div class="modal-dialog">
-				<div class="modal-content">
-
-					<form method="POST" action="page.php">
-						<div class="modal-header">
-							<h4 class="modal-title">Add QUIZZES</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						</div>
-						<div class="modal-body">
-							<div class="form-group">
-								<label>QUIZZE title</label>
-								<input type="text" class="form-control" name="quizzeTitle" required>
-							</div>
-							<div class="form-group">
-								<label>Cource ID</label>
-
-								<select class='form-control' name='courseId' required>";
-									<?php
-									$r = "SELECT * FROM courses";
-									$query = mysqli_query($connection, $r);
-									while ($value = mysqli_fetch_assoc($query)) {
-										echo "<option>" . $value['courseId'] . "</option>";
-									}
-									?>
-								</select>
-							</div>
-							<div class="form-group">
-								<label>Score</label>
-								<input type="number" class="form-control" name="score" required></input>
-							</div>
-							<div class="form-group">
-								<label>la Date</label>
-								<input type="text" class="form-control" name="date" required>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-							<input type="submit" class="btn btn-success" value="Add">
-						</div>
-					</form>
-				</div>
-			</div>
 		</div>
 
 		<!-- plugins:js -->

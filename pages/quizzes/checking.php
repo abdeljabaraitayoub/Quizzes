@@ -38,5 +38,5 @@ if (isset($_POST['title']) && $_POST['courseId']) {
         }
     }
 
-    echo "Data insertion completed successfully<br>";
+    header("Location:show.php?created=true");
 }
