@@ -1,18 +1,6 @@
 <?php
 include('../../dbcon.php');
 ?>
-<?php
-if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_POST['video_link']) {
-    $title = $_POST['title'];
-    $desciption = $_POST['description'];
-    $content = $_POST['content'];
-    $link = $_POST['video_link'];
-    $query = "INSERT INTO `courses` (`title`,`description`,`content`,`link`) VALUES ('$title','$desciption','$content','$link')";
-    if (mysqli_query($connection, $query)) {
-        header('location:show.php');
-    }
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +29,12 @@ if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_PO
 
 <body>
     <style>
+        select {
+            opacity: 1;
+            /* Reset opacity to default */
+            /* Add other reset styles if needed */
+        }
+
         .min {
             min-height: 249px;
         }
@@ -83,8 +77,11 @@ if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_PO
             <div class="main-panel">
                 <div class="content-wrapper">
 
-                    <form method="post" class="forms-sample">
+                    <form method="post" action="checking.php" class="forms-sample">
+
                         <div class="card mb-3">
+
+
                             <div class="card-body ">
                                 <h4 class="card-title">Page de creation de quizz</h4>
                                 <p class="card-description">
@@ -95,17 +92,19 @@ if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_PO
                                     <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="title" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Cource ID</label>
+                                    <label>Course name</label>
 
-                                    <select class='form-control' name='courseId' required>";
+                                    <select class='form-control' name='courseId' required>
                                         <?php
                                         $r = "SELECT * FROM courses";
                                         $query = mysqli_query($connection, $r);
+
                                         while ($value = mysqli_fetch_assoc($query)) {
-                                            echo "<option>" . $value['courseId'] . "</option>";
+                                            echo '<option value=' . $value['id'] . ' >' . $value['title'] . '</option>';
                                         }
                                         ?>
                                     </select>
+
                                 </div>
                             </div>
                         </div>
@@ -115,65 +114,90 @@ if (isset($_POST['title']) && $_POST['description'] && $_POST['content'] && $_PO
                                 <p class="card-description">
                                     Entrer votre questiones
                                 </p>
+                                <!-- Question 0 -->
                                 <div>
                                     <div class="form-group">
                                         <label for="exampleInputTitle">Question 1</label>
-                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="title" required>
+                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="question0" required>
                                     </div>
-                                    <div class="form-group ">
+                                    <div class="form-group">
                                         <label for="exampleInputTitle">Reponses</label>
                                         <div class="d-flex">
-                                            <input type="text" class="form-control text-success  mr-5 " id="exampleInputTitle" placeholder="reponse correct" name="title">
-                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="title">
-                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="title">
+                                            <input type="text" class="form-control text-success mr-5" id="exampleInputTitle" placeholder="reponse correct" name="response0">
+                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="response1">
+                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="response2">
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Question 1 -->
                                 <div>
                                     <div class="form-group">
                                         <label for="exampleInputTitle">Question 2</label>
-                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="title" required>
+                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="question1" required>
                                     </div>
-                                    <div class="form-group ">
+                                    <div class="form-group">
                                         <label for="exampleInputTitle">Reponses</label>
                                         <div class="d-flex">
-                                            <input type="text" class="form-control text-success  mr-5 " id="exampleInputTitle" placeholder="reponse correct" name="title">
-                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="title">
-                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="title">
+                                            <input type="text" class="form-control text-success mr-5" id="exampleInputTitle" placeholder="reponse correct" name="response3">
+                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="response4">
+                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="response5">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Question 2 -->
+                                <div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTitle">Question 3</label>
+                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="question2" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTitle">Reponses</label>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control text-success mr-5" id="exampleInputTitle" placeholder="reponse correct" name="response6">
+                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="response7">
+                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="response8">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Question 3 -->
+                                <div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTitle">Question 4</label>
+                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="question3" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTitle">Reponses</label>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control text-success mr-5" id="exampleInputTitle" placeholder="reponse correct" name="response9">
+                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="response10">
+                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="response11">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Question 4 -->
+                                <div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTitle">Question 5</label>
+                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="question4" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputTitle">Reponses</label>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control text-success mr-5" id="exampleInputTitle" placeholder="reponse correct" name="response12">
+                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="response13">
+                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="response14">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <div class="form-group">
-                                        <label for="exampleInputTitle">Question 3</label>
-                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="title" required>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="exampleInputTitle">Reponses</label>
-                                        <div class="d-flex">
-                                            <input type="text" class="form-control text-success  mr-5 " id="exampleInputTitle" placeholder="reponse correct" name="title">
-                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="title">
-                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="title">
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary mr-2">Soumettre</button>
+                                    <a class="btn btn-light" href="show.php">Annuler</a>
                                 </div>
-                                <div>
-                                    <div class="form-group">
-                                        <label for="exampleInputTitle">Question pages/quizzes/addquiz.php</label>
-                                        <input type="text" class="form-control" id="exampleInputTitle" placeholder="Titre du quizz" name="title" required>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="exampleInputTitle">Reponses</label>
-                                        <div class="d-flex">
-                                            <input type="text" class="form-control text-success  mr-5 " id="exampleInputTitle" placeholder="reponse correct" name="title">
-                                            <input type="text" class="form-control text-danger mr-5" id="exampleInputTitle" placeholder="reponse faux" name="title">
-                                            <input type="text" class="form-control text-danger" id="exampleInputTitle" placeholder="reponse faux" name="title">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary mr-2">Soumettre</button>
-                                <a class="btn btn-light" href="show.php">Annuler</a>
                             </div>
                         </div>
                     </form>
