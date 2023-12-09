@@ -66,7 +66,18 @@ if (isset($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <button type="button" class="btn btn-inverse-success btn-md mr-2">Passer le quiz</button>
+                                <?php
+                                $quizQuery = "SELECT * FROM quizzes WHERE course_id = '$courseId' LIMIT 1";
+                                $quizResult = mysqli_query($connection, $quizQuery);
+                                $quizRow = mysqli_fetch_array($quizResult);
+
+                                if ($quizRow) {
+                                    $quizID = $quizRow['id'];
+                                    echo "<a href='questions/show.php?id=$quizID' class='btn btn-inverse-success btn-md mr-2'>Passer le quiz</a>";
+                                } else {
+                                    echo "<p>No quiz available for this course.</p>";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

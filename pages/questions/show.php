@@ -1,9 +1,17 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    abort(403);
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
-  <title>Examen QCM</title>
+    <title>Quizzes</title>
+    <link rel="shortcut icon" href="../../images/favicon.ico" />
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -79,13 +87,18 @@
     <div class="quiz-container">
       <div class="row">
         <div class="col-md-8 offset-md-2">
-          <h2 class="text-center">QUiZZe</h2>
-
           <?php
           if (isset($_GET["id"])) {
             $quizid = $_GET["id"];
 
             require '../../dbcon.php';
+
+              $quizTitleQuery = "SELECT title FROM quizzes WHERE id = '$quizid'";
+              $quizTitleResult = mysqli_query($connection, $quizTitleQuery);
+              $quizTitle = mysqli_fetch_assoc($quizTitleResult)['title'];
+          ?>
+              <h2 class="text-center"><?php echo $quizTitle; ?></h2>
+              <?php
             $r = "SELECT * FROM questions where quiz_id ='$quizid'";
             $q = mysqli_query($connection, $r);
             while ($value = mysqli_fetch_assoc($q)) {
@@ -95,9 +108,9 @@
 
               while ($value2 = mysqli_fetch_assoc($q2)) {
                 echo "<div class='option'>
-       <input class type='radio' id=" . $value2['id'] . " name=" . $value['id'] . " value=" . $value2['id'] . ">
-       <label for=" . $value2['id'] . "  >" . $value2['answer_text'] . "</label>
-     </div>";
+                   <input class type='radio' id=" . $value2['id'] . " name=" . $value['id'] . " value=" . $value2['id'] . ">
+                   <label for=" . $value2['id'] . "  >" . $value2['answer_text'] . "</label>
+                 </div>";
               }
             }
           }
@@ -111,34 +124,34 @@
     </div>
   </form>
 
-  <?php
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $r = "SELECT * FROM questions";
-    $q = mysqli_query($connection, $r);
-    while ($value = mysqli_fetch_assoc($q)) {
-      $r2 = "SELECT * FROM questions INNER JOIN answers ON questions.id = answers.question_id WHERE questions.id = " . $value['id'];
-      $q2 = mysqli_query($connection, $r2);
-      while ($value2 = mysqli_fetch_assoc($q2)) {
-        $id = $value2['id'];
-        if (isset($_POST["$id"])) {
-          $reponse_id = $_POST["$id"];
-          echo $reponse_id . "<br>";
-          $r3 = "SELECT * from answers where id = $reponse_id";
-          $q3 = mysqli_query($connection, $r3);
-          $v3 = mysqli_fetch_assoc($q3);
-          // echo "<div>
-          // <h3>" . $v3['answer_text'] . "</h3>
-          // </div>";
-          if ($v3['is_correct'] == 0) {
-            echo 'votre question est faux';
-          } else {
-            echo 'cest correct';
-          }
-        }
-      }
-    }
-  }
-  ?>
+          <?php
+              if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $r = "SELECT * FROM questions";
+                $q = mysqli_query($connection, $r);
+                while ($value = mysqli_fetch_assoc($q)) {
+                  $r2 = "SELECT * FROM questions INNER JOIN answers ON questions.id = answers.question_id WHERE questions.id = " . $value['id'];
+                  $q2 = mysqli_query($connection, $r2);
+                  while ($value2 = mysqli_fetch_assoc($q2)) {
+                    $id = $value2['id'];
+                    if (isset($_POST["$id"])) {
+                      $reponse_id = $_POST["$id"];
+                      echo $reponse_id . "<br>";
+                      $r3 = "SELECT * from answers where id = $reponse_id";
+                      $q3 = mysqli_query($connection, $r3);
+                      $v3 = mysqli_fetch_assoc($q3);
+                      // echo "<div>
+                      // <h3>" . $v3['answer_text'] . "</h3>
+                      // </div>";
+                      if ($v3['is_correct'] == 0) {
+                        echo 'votre question est faux';
+                      } else {
+                        echo 'cest correct';
+                      }
+                    }
+                  }
+                }
+              }
+          ?>
 
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

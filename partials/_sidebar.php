@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo BASE; ?>pages/courses/student_quizzes.php">
+                <a class="nav-link" href="<?php echo BASE; ?>pages/quizzes/student_quizzes.php">
                     <i class="mdi mdi-comment-question-outline menu-icon"></i>
                     <span class="menu-title">Mes quiz</span>
                 </a>

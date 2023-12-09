@@ -1,9 +1,17 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    abort(403);
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
-  <title>Examen QCM</title>
+    <title>Quizzes</title>
+    <link rel="shortcut icon" href="../../images/favicon.ico" />
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -64,7 +72,6 @@
   <div class="quiz-container">
     <div class="row">
       <div class="col-md-8 offset-md-2">
-        <h2 class="text-center">QUiZZe</h2>
 
         <?php
 
@@ -91,6 +98,13 @@
         // }
         $quizid = $_GET["id"];
 
+        $quizTitleQuery = "SELECT title FROM quizzes WHERE id = '$quizid'";
+        $quizTitleResult = mysqli_query($connection, $quizTitleQuery);
+        $quizTitle = mysqli_fetch_assoc($quizTitleResult)['title'];
+        ?>
+          <h2 class="text-center"><?php echo $quizTitle; ?></h2>
+        <?php
+
         $r = "SELECT * FROM questions where quiz_id ='$quizid'";
         $q = mysqli_query($connection, $r);
         $cont = 0;
@@ -110,9 +124,9 @@
             }
 
             echo "<div class='option'>
-      <input class type='radio' id=" . $value2['id'] . " name=" . $value['id'] . " value=" . $value2['id'] . ">
-      <label style='background-color:$color' for=" . $value2['id'] . "  >" . $value2['answer_text'] . "</label>
-    </div>";
+                  <input class type='radio' id=" . $value2['id'] . " name=" . $value['id'] . " value=" . $value2['id'] . ">
+                  <label style='background-color:$color' for=" . $value2['id'] . "  >" . $value2['answer_text'] . "</label>
+                </div>";
           }
           $chosen_id = $_POST[$value['id']];
           $r_chosen = "SELECT * FROM answers where id = $chosen_id";
@@ -125,10 +139,10 @@
         $score = ($cont * 100) / $q->num_rows;
 
         echo "
-  <h3>Your score in this exam is $score %</h3>
-  <div class='progress bg-body'>
-  <div class='progress-bar bg-success' role='progressbar' style='width:$score%' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'></div>
-  </div>";
+              <h4>Votre score dans cet examen est de $score %</h4>
+              <div class='progress bg-body'>
+              <div class='progress-bar bg-success' role='progressbar' style='width:$score%' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'></div>
+              </div>";
 
         ?>
       </div>
