@@ -14,12 +14,19 @@ if (isset($_POST['title']) && $_POST['courseId']) {
 
     $query1 = "INSERT INTO `quizzes` (`title`,`course_id`,`score`,`dateHour`) VALUES ('$title','$courseid','1','$time')";
     mysqli_query($connection, $query1);
+}
 
     // Retrieve the inserted quiz ID
     $query2 = "SELECT * FROM `quizzes` WHERE title ='$title' ORDER BY `id` DESC LIMIT 1";
     $result = mysqli_query($connection, $query2);
     $row = mysqli_fetch_assoc($result);
     $quizId = $row['id'];
+
+    if (isset($_POST['editQuizId'])) {
+        // Update existing quiz
+        $editQuizId = $_POST['editQuizId'];
+        $updateQuizQuery = "UPDATE `quizzes` SET `title`='$title', `course_id`='$courseid', `dateHour`='$time' WHERE `id`='$editQuizId'";
+        mysqli_query($connection, $updateQuizQuery); 
 
     // Loop through questions
     for ($i = 0; $i < 5; $i++) {
