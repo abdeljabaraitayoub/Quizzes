@@ -75,7 +75,7 @@ if (isset($_GET['id'])) {
                                     $quizID = $quizRow['id'];
                                     echo "<a href='questions/show.php?id=$quizID' class='btn btn-inverse-success btn-md mr-2'>Passer le quiz</a>";
                                 } else {
-                                    echo "<p>No quiz available for this course.</p>";
+                                    echo "<p>Aucun quiz disponible pour ce cours.</p>";
                                 }
                                 ?>
                             </div>
