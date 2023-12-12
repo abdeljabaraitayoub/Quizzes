@@ -48,7 +48,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'student') {
                         <div class="col-lg-12 mx-auto">
                             <div class="card">
                                 <div class="card-body">
-                                    <a href='addquiz.php' class="btn btn-primary mb-4 position-relative ">+ Ajouter un quiz</a>
                                     <div class="table-responsive">
                                         <table class="table table-hover">
                                             <thead>
